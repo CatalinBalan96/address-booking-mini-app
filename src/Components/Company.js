@@ -12,7 +12,6 @@ const TabelCompanii = () => {
     const [companii, setCompanii] = useState(data);
     const stergeCompanie = id => setCompanii(prevState => prevState.filter(item => item.id !== id))
 
-
     return (
         <Table hover>
             <TableHead />
