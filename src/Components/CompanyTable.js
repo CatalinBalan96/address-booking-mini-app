@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Table, Button } from 'reactstrap';
+import { Table, Button} from 'reactstrap';
 import AddCompanyModal from './AddCompanyModal';
+import EditCompanyModal from './EditCompanyModal';
 
 const CompanyTable = () => {
   
@@ -28,6 +29,7 @@ const companyData = [
         setData([...data, company])
     }
 
+    
     //Remove Company
     const removeCompany = id => setData(prevState => prevState.filter(item => item.id !== id))
     return (
@@ -38,7 +40,7 @@ const companyData = [
                     <tr>
                         <th>#</th>
                         <th>Nume</th>
-                        <th>Telefon</th>
+                        <th>Telefon</th> 
                         <th>Adresa</th>
                         <th>Actiuni</th>
                     </tr>
@@ -52,7 +54,7 @@ const companyData = [
                                 <td>{company.phone}</td>
                                 <td>{company.address}</td>
                                 <td>
-                                    <Button className="mr-2" color="success" size="sm">Editeaza</Button>
+                                <EditCompanyModal {...ModalData}/>
                                 <Button color="danger" size="sm" onClick={() => removeCompany(company.id)}>Sterge</Button>
                                 </td>
                             </tr>
