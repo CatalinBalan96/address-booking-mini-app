@@ -2,9 +2,23 @@ import React, { useState } from 'react'
 import {Button, Col, Modal, ModalHeader, ModalBody, ModalFooter, Form,FormGroup, Label, Input} from 'reactstrap';
 
 
-const CompanyModal = (props) => {
-    //JavascriptCode
+const AddCompanyModal = (props) => {
 
+    //Company initial Form State
+    const initalFormState = {
+        name: '',
+        phone: '',
+        address: ''
+    }
+    const [company, setCompany] = useState(initalFormState)
+    
+    //Company Input FIelds Change
+    const handleInputChange = (event) => {
+        const {name, value} = event.target
+        setCompany({...company, [name]: value})
+    }
+
+    //Company Modal
     const[modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
@@ -16,23 +30,28 @@ const CompanyModal = (props) => {
                     Adauga Companie
                 </ModalHeader>
                 <ModalBody>
-                    <Form>
+                    <Form onSubmit={(event) => {
+                        event.preventDefault();
+                        if(!company.name || !company.phone || !company.address) return
+                        props.addCompany(company)
+                        setCompany(initalFormState)
+                    }}>
                         <FormGroup row>
                             <Label for="name" sm={2}>Nume:</Label>
                             <Col sm={10}>
-                                <Input type="text" placeholder="Introduceti numele companiei"></Input>
+                                <Input type="text" name="name" placeholder="Introduceti numele companiei" value={company.name} onChange={handleInputChange}></Input>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
                             <Label for="phone" sm={2}>Telefon:</Label>
                             <Col sm={10}>
-                                <Input type="number" placeholder="Introduceti numarul de telefon"></Input>
+                                <Input type="number" name="phone" placeholder="Introduceti numarul de telefon" value={company.phone} onChange={handleInputChange}></Input>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
                             <Label for="address" sm={2}>Adresa:</Label>
                             <Col sm={10}>
-                                <Input type="text" placeholder="Introduceti adresa"></Input>
+                                <Input type="text" name="address" placeholder="Introduceti adresa" value={company.address} onChange={handleInputChange}></Input>
                             </Col>
                         </FormGroup>
                             <Button color="success" size="sm">{props.saveButtonText}</Button>
@@ -46,4 +65,4 @@ const CompanyModal = (props) => {
     )
 }
 
-export default CompanyModal;
+export default AddCompanyModal;
