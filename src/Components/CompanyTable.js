@@ -30,7 +30,6 @@ const companyData = [
 
     //Remove Company
     const removeCompany = id => setData(prevState => prevState.filter(item => item.id !== id))
-
     return (
         <div>
             <AddCompanyModal {...ModalData} addCompany={addCompany}/>
