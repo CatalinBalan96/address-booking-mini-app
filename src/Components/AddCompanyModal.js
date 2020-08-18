@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {Button, Col, Modal, ModalHeader, ModalBody, ModalFooter, Form,FormGroup, Label, Input} from 'reactstrap';
 
 
+
 const AddCompanyModal = (props) => {
 
     //Company initial Form State

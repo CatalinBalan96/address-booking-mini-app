@@ -3,16 +3,16 @@ import { Table, Button } from 'reactstrap';
 import AddCompanyModal from './AddCompanyModal';
 
 const CompanyTable = () => {
+  
     //CompanyModalData 
-
-const ModalData = {
-    addButtonText: "Adauga",
-    editButtonText: "Editeaza",
-    saveButtonText: "Salveaza",
-    removeButtonText: "Sterge",
-    closeButtonText: "Inchide",
-    className: "custom-modal"
-}
+    const ModalData = {
+        addButtonText: "Adauga",
+        editButtonText: "Editeaza",
+        saveButtonText: "Salveaza",
+        removeButtonText: "Sterge",
+        closeButtonText: "Inchide",
+        className: "custom-modal"
+    }
 
 const companyData = [
     { id: '1', name: 'AC HELCOR', phone: '0773989241', address: 'Miron Pompiliu' },
