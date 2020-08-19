@@ -9,15 +9,15 @@ const AddCompanyModal = (props) => {
         phone: '',
         address: ''
     }
-    const [company, setCompany] = useState(initalFormState)
     
+   const [company, setCompany] = useState(initalFormState) 
     //Company Input FIelds Change
     const handleInputChange = (event) => {
         const {name, value} = event.target
         setCompany({...company, [name]: value})
     }
 
-    //Company Modal
+    //Modal toggle
     const[modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 

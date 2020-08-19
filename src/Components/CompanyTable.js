@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Button} from 'reactstrap';
 import AddCompanyModal from './AddCompanyModal';
-import EditCompanyModal from './EditCompanyModal';
+import EditModalCompany from './EditCompanyModal';
 
 const CompanyTable = () => {
   
@@ -25,16 +25,45 @@ const companyData = [
 
     //Add Company
     const addCompany = (company) => {
-        company.id = data.length + 1
+        company.id = Date.now()
         setData([...data, company])
     }
 
-    
+    //Edit Company
+    const [editing, setEditing] = useState(false)
+    const initialFormState = {
+        id: null,
+        name: '',
+        phone: '',
+        address: ''
+    }
+    const [currentCompany, setCurrentCompany] = useState(initialFormState)
+
+    const editRow = (company) => {
+        setEditing(true)
+        setCurrentCompany(
+            {
+                id: company.id,
+                name: company.name,
+                phone: company.phone,
+                address: company.address
+            }
+        )
+    }
+    const updateCompany = (id, updatedCompany) => {
+        setEditing(false)
+        setData(data.map((company) => (company.id === id ? updatedCompany : company)))
+    }
     //Remove Company
     const removeCompany = id => setData(prevState => prevState.filter(item => item.id !== id))
+   
     return (
         <div>
-            <AddCompanyModal {...ModalData} addCompany={addCompany}/>
+            {editing ? (
+                 <EditModalCompany {...ModalData} currentCompany={currentCompany} updateCompany={updateCompany} setEditing={setEditing}/>
+            ) : (
+                <AddCompanyModal {...ModalData} addCompany={addCompany} />
+            )}
             <Table hover>
                 <thead>
                     <tr>
@@ -54,7 +83,7 @@ const companyData = [
                                 <td>{company.phone}</td>
                                 <td>{company.address}</td>
                                 <td>
-                                <EditCompanyModal {...ModalData}/>
+                                <Button color="success" size="sm" className="mr-3" onClick={() => {editRow(company)}}>Editeaza</Button>
                                 <Button color="danger" size="sm" onClick={() => removeCompany(company.id)}>Sterge</Button>
                                 </td>
                             </tr>
